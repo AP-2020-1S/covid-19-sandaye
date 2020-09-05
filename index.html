@@ -1,0 +1,197 @@
+
+<!DOCTYPE html>
+ <html lang="en">
+      <head>
+        <meta charset="utf-8">
+        <style>
+            body {
+              background-color: rgb(211, 211, 211);
+              margin:0px;
+            }
+            </style>
+    <head>
+      <title>casos confirmados</title>
+    </head>
+    <style>
+    * {
+      box-sizing: border-box;
+    }
+    
+    /* Create three equal columns that floats next to each other */
+    .columngeneral {
+      float: left;
+      width:100%;
+      padding: 1em;
+      height: 100%; /* Should be removed. Only for demonstration */
+      background-color:  rgb(211, 211, 211); 
+      margin:0px
+
+    }
+    .columnprincipal {
+      float:none;
+      width:98%;
+      padding: 1em;
+      height: 100%; /* Should be removed. Only for demonstration */
+      margin-left: 1%;
+      margin-right: 1%;
+      margin-top: 0px;
+      background-color:  rgb(211, 211, 211); 
+
+    }
+
+    .columnbanner {
+      float: left;
+      width:100%;
+      padding: 1em;
+      height: 15%; /* Should be removed. Only for demonstration */
+      box-shadow: 2px 2px #b3b2b2;
+      background-color:rgb(255, 255, 255);
+      border-radius:12px;; 
+
+    }
+    .columnciudad {
+      float: left;
+      width:100%;
+      height: 3%; /* Should be removed. Only for demonstration */
+      box-shadow: 2px 2px #b3b2b2;
+      background-color:rgb(177, 5, 5);
+      border-radius:12px;
+      
+      
+    }
+
+
+    .column {
+      float: left;
+      width:calc(98% / 3);
+      padding: 1em;
+      height: 100px; /* Should be removed. Only for demonstration */
+      margin: 3.8px;
+      box-shadow: 2px 2px #b3b2b2;
+      background-color:rgb(255, 255, 255);
+      border-radius:12px;
+      
+    }
+    
+    .column2 {
+      float: left;
+      width:calc(99% / 2);
+      padding:1em;
+      height: 400px; /* Should be removed. Only for demonstration */
+      margin: 2.5px;
+      box-shadow: 2px 2px #b3b2b2;
+      background-color:rgb(255, 255, 255);
+      border-radius:12px;
+    }
+    /* Clear floats after the columns */
+    .row:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+    .serif {
+      font-family: "Times New Roman", Times, serif;
+    }
+
+    .sansserif {
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: bold;
+    }
+
+    .monospace {
+      font-family: "Lucida Console", Courier, monospace;
+    }
+    .seltext {
+            font-weight: bold;
+        }
+     
+select {
+   background: transparent;
+   border: whitesmoke;
+   font-size: 16px;
+   color:rgb(221, 218, 218);
+   height: 90%;
+   padding: 1%;
+   width: 20%;
+   margin-left: 40%;
+   text-align-last:center;
+}
+select:focus{ outline: none;}
+
+    </style>
+
+<div class="row">
+  <div class="columngeneral">
+
+<div class="row">
+  <div class="columnprincipal">
+    
+  <div class="row">
+  <div class="columnbanner">
+    <img src="templates/bannercovid.png" height= "99%" width="99%"   alt="fig1">
+  </div>
+  <div class="row">
+   <div class="column">
+    <p class="sansserif" style="text-align: center; color: rgb(83, 83, 83); font-size: 15px;">Total Confirmados:</p><p  class="sansserif" style="text-align: center; color: rgb(255, 255, 255); font-size: 20px;"><iframe style="background: #FFFFFF" src="templates/test1.txt" height="30" width="80" scrolling="no" frameBorder="0"></iframe></p>
+   </div>
+   <div class="column" >
+    <p class="sansserif" style="text-align: center; color: rgb(83, 83, 83); font-size: 15px;">Total Muertes:</p>
+    <p class="sansserif" style="text-align: center; color: rgb(255, 255, 255); font-size: 20px;"><iframe id='myFrame' src="templates/test.txt" height="30" width="80" scrolling="no" frameBorder="0"></iframe></p>
+    </div>
+   <div class="column" >
+    <p class="sansserif" style="text-align: center; color: rgb(83, 83, 83); font-size: 15px;">Total Recuperados:</p>
+    <p class="sansserif" style="text-align: center; color: rgb(255, 255, 255); font-size: 20px;"><iframe src="templates/test.txt" height="30" width="80" scrolling="no" frameBorder="0"></iframe></p>
+    </div>
+ </div>
+ <div class="row">
+ <div class="columnciudad">
+   <select class="select" dir="ltr" id="ciudad" name="Ciudad"  onchange="selectPlot()" height= "95%" width="20%">
+     <option value="Bogotá">Bogotá</option>
+     <option value="Medellín">Medellín</option>
+     <option value="Cali">Cali</option>
+     <option value="Barranquilla">Barranquilla</option>
+     <option value="Cartagena">Cartagena</option>
+   </select>
+ </div>
+
+ <div class="row">
+  <div class="column2">
+        <div class="myImage" id="Bogotá"   style="display:block"> <object data="templates/temp-plot2.html" height= "380px" width="95%"></object>   </div>
+        <div class="myImage" id="Medellín"   style="display:none">  <object data="templates/temp-plot.html" height= "380px" width="95%"></object>   </div>   
+        <div class="myImage" id="Cali"   style="display:none">  <img src="figs/S.Amer.png"   alt="S.Amer">   </div>
+        <div class="myImage" id="Barranquilla"  style="display:none">  <img src="figs/Oceania.png"  alt="Oceania">  </div>
+        <div class="myImage" id="Cartagena"   style="display:none">  <img src="figs/Africa.png"   alt="Africa">   </div>
+        </div>
+  <div class="column2">
+    <div class="myImage" id="Bogotá"   style="display:block"> <object data="templates/temp-plot_t2.html" height= "380pxpx" width="95%"></object>   </div>
+        <div class="myImage" id="Medellín"   style="display:none">  <object data="templates/tabla.html" height= "380px" width="95%x"></object>   </div>   
+        <div class="myImage" id="Cali"   style="display:none">  <img src="figs/S.Amer.png"   alt="S.Amer">   </div>
+        <div class="myImage" id="Barranquilla"  style="display:none">  <img src="figs/Oceania.png"  alt="Oceania">  </div>
+        <div class="myImage" id="Cartagena"   style="display:none">  <img src="figs/Africa.png"   alt="Africa">   </div>
+        </div>
+  <div class="row">
+<div class="column2">
+</div>
+<div class="column2">
+</div>
+
+
+ </div>
+  </div>
+</div>
+  <script>
+    function selectPlot() {
+      var ciudad = document.getElementById("ciudad").value;
+      var images = document.getElementsByClassName("myImage");
+      for (var i = 0; i < images.length; i++) {
+        if (images[i].id == ciudad) {
+          images[i].style.display = "block"
+        }else{
+          images[i].style.display = "none"
+        }
+      }
+    }
+  </script>
+</html>
+
+
