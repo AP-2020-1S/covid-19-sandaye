@@ -85,17 +85,197 @@ _Ver rutina de limpieza de datos en el siguiente link:_
 
 ## Análisis Exploratorio de los datos
 
+# METODOLOGIAS PROPUESTAS
+Para  este proyecto se proponen las siguientes metodologías de pronóstico 
+
+## 1. _Modelo de pronóstico  de corto  plazo_
+## 1.1 _Modelo ARIMA_
+En 1970, Box y Jenkins desarrollaron un cuerpo metodológico destinado a identificar, estimar y diagnosticar modelos dinámicos de series temporales en los que la variable tiempo juega un papel fundamental. Una parte importante de esta metodología está pensada para liberar al investigador económetra de la tarea de especificación de los modelos dejando que los propios datos temporales de la variable a estudiar nos indiquen las características de la estructura probabilística subyacente.
+
+El inconveniente es que, al renunciar a la inclusión de un conjunto más amplio de variables explicativas, no atendemos a las relaciones que sin duda existen entre casi todas las variables económicas perdiendo capacidad de análisis al tiempo que renunciamos, implícitamente, al estudio teórico previo del fenómeno y a su indudable utilidad. Sin embargo , los modelos ARIMA son de gran utilidad en muchos campos. En este proyecto elegimos usar este modelo gracias a su gran potencial y simpleza tanto en interpretación como en aplicabilidad
+
+* _Proceso estocástico y estacionariedad_
+
+Un proceso estocástico es una sucesión de variables aleatorias Y ordenadas,pudiendo tomar t cualquier valor entre -infinito y infinito. Por ejemplo, la siguiente sucesión de variables aleatorias puede ser considerada como proceso estocástico:
+
+<img aling="center" src="fig\Arima_estacionaridad.png"
+     alt="arima"
+     style="float: left; margin-right: 1000px;" />                                                         
+  
+Decimos que un proceso estocástico es estacionario si las funciones de distribución conjuntas son invariantes con respecto a un desplazamiento en el tiempo (variación de t). Es decir, considerando que t, t+1, t+2, ...., t+k reflejan períodos sucesivos:  
+  
+    
+
+
+<img aling="center" src="fig\Arima_estacionnaridad2.png"
+     alt="arima"
+     style="float: left; margin-right: 1000px;" />
+
+* _Especificación del  modelo ARIMA_
+
+En su forma más general el modelo ARIMA(p,d,q) ARIMA(P,D,Q,)S podría escribirse como:
+<img aling="center" src="fig\Arima_estacionaridad3.png"
+     alt="arima"
+     style="float: left; margin-right: 1000px;" />
 
 
 
-# 1. DESPLIEGUE DEL MODELO
-## 1.2 Modelo ARIMA
-Para el despliegue del modelo ARIMA se presentan los pronósticos a corto plazo del total de casos confirmados, nuevos casos, casos activos, recuperados y fallecidos para las 5 principales ciudades de colombia, para observar el comportamiento futuro del virus Covid-19 en las personas pertenecientes a las mismas.
+Entendiendo que puede haber más de un proceso generador de la serie (en la parte regular y en la estacional) y escribiendo una combinación de los modelos MA(q) y AR(p) que han precisado de una serie de diferenciaciones "d" en la parte regular o "D" en la parte estacional para que fueran estacionarios. 
 
-## MEDELLÍN
+Variables a predecir por el modelo ARIMA nombrado anteriormente:
 
-A continuación se presenta el modelado y pronóstico para la ciudad de Medellín:
+|  Variable             |    Tipo de dato         |  
+|-----------------------|-------------------------|
+|Casos Nuevos (diario)               |  Serie de Tiempo               |
+|Casos Confirmados (Acumulado)  |  Serie de Tiempo                 |
+|Casos Activos (Acumulado)        |  Serie de Tiempo               |
+|Recuperados (Acumulado)   |  Serie de Tiempo             |
+|Muertes (Acumulado)|  Serie de Tiempo             |
+|Muertes (Diario)               |  Serie de Tiempo                |
 
+
+## _2. Modelo de pronóstico  de mediano  plazo_
+## _2.1 Modelo SIR_
+Los modelos SIR fueron desarrollados por Kermack y McKendrick en 1927 y han sido aplicados en diversos escenarios de epidemias. Estos modelos estiman el número teórico de personas susceptibles de enfermar (susceptibles), el número de enfermos (infectados) y el número de personas que ya no pueden transmitir la enfermedad (Recuperados o fallecidos), en una población a lo largo del tiempo. Los supuestos básicos de los modelos SIR son: a. La población es homogénea y de tamaño fijo; b. En un momento dado, cada individuo sólo puede pertenecer a uno de los siguientes conjuntos: infectados, susceptibles o resistentes; c. La interacción entre los individuos es aleatoria, y; d. No hay intervención externa que cambie la tasa de contacto de la población. En estos modelos se asume que la población por estado (N) es constante y que el número de individuos susceptibles S(t), infectados I(t) y fallecidos R(t) son variables dependientes del tiempo, de manera que:
+
+<img aling="center" src="fig\SIR.png"
+     alt="arima"
+     style="float: left; margin-right: 1000px;" />
+
+Dado que el tamaño de la población es fijo, se puede reducir el sistema de ecuaciones a otro con dos ecuaciones, definiendo r(t)=1-s(t)-i(t). Los modelos se pueden establecer con indicadores previamente elaborados a partir del comportamiento del microorganismo estudiado y de sucesos previamente establecidos (brotes anteriores), en los cuales es clave precisar la patogenicidad, la duración media de la enfermedad, las tasas de interacción, la probabilidad de contagio, la tasa de recuperación, su letalidad y mortalidad en poblaciones definidas, así como un R0 (número básico de reproducción) y Rt (número de reemplazamiento). 
+
+ Variables a predecir por el modelo SIR nombrado anteriormente:
+
+|  Variable             |    Tipo de dato         |  
+|-----------------------|-------------------------|
+|Población Susceptible (Acumulado)              |  Serie de Tiempo               |
+|Casos Infectados (Acumulado)  |  Serie de Tiempo                 |
+|Casos Activos (Acumulado)        |  Serie de Tiempo               |
+|Recuperados y Muertes (Acumulado)    |  Serie de Tiempo             |
+
+
+# DESARROLLO DE LOS MODELOS
+## _Esquema de desarrollo del modelo ARIMA_
+<img aling="center" src="fig\ESQUEMAARIMA.png"
+     alt="arima"
+     style="float: left; margin-right: 1000px;" />
+
+## _Código Python(Etapas)_
+
+* _Etapa 1_
+
+```python
+import requests
+import os.path
+import os
+import pandas as pd
+import numpy as np
+import requests
+import os.path
+import os
+import datetime
+import dateutil
+import subprocess
+import sys
+import tempfile
+
+!pip install unidecode
+import unidecode
+
+# data oficial
+url_dataset = 'https://www.datos.gov.co/api/views/gt2j-8ykr/rows.csv?accessType=DOWNLOAD'
+# muestras procesadas diarias
+url_muestras_diarias = 'https://e.infogram.com/api/live/flex/638d656c-c77b-4326-97d3-e50cb410c6ab/8188140c-8352-4994-85e3-2100a4dbd9db?'
+
+# datos de entrada disponibles en el directorio "../Input/".
+'./'
+if os.path.split(os.path.abspath('.'))[-1] == 'src':
+    '../Input_data'
+# datos de salida disponibles en el directorio "../Output/".
+'./'
+if os.path.split(os.path.abspath('.'))[-1] == 'src':
+    '../Output'
+
+    # crear archivo data_covid.csv
+with requests.get(url_dataset) as dataset_oficial:
+    with open(os.path.join('../Input_data', 'data_covid.csv'), 'wb') as dataset_file:
+        dataset_file.write(dataset_oficial.content)
+
+        # crear archivo muestras diarias procesadas
+with requests.get(url_muestras_diarias) as dataset_muestras:
+    with open(os.path.join('../Input_data', 'data_muestras_procesadas.csv'), 'wb') as dataset_file:
+        dataset_file.write(dataset_muestras.content)
+
+# Lee el archivo descargado
+dfcovid = pd.read_csv(os.path.join('../Input_data', 'data_covid.csv'))
+
+# nombre de atributo en mayuscula y sin acento
+dfcovid.columns = [unidecode.unidecode(value).upper() for value in dfcovid.columns]
+
+# Eliminar ciudades diferentes a las 5 seleccionadas:
+dfcovid=dfcovid.drop(dfcovid[(dfcovid['CODIGO DIVIPOLA'] != 5001)&(dfcovid['CODIGO DIVIPOLA'] != 11001)&(dfcovid['CODIGO DIVIPOLA'] != 8001)&(dfcovid['CODIGO DIVIPOLA'] != 76001)&(dfcovid['CODIGO DIVIPOLA'] != 13001)].index)
+
+#Eliminar columnas basura
+dfcovid = dfcovid.drop(['NOMBRE GRUPO ETNICO','PERTENENCIA ETNICA'], axis=1)
+
+#Convertir las columnas a tipo string para un facil manejo
+dfcovid = dfcovid.astype({"DEPARTAMENTO O DISTRITO ": str, "TIPO RECUPERACION": str,"PAIS DE PROCEDENCIA": str,"ESTADO": str, "ATENCION": str})
+
+#Transformar los datos de texto en mayusculas (PENDIENTE)
+dfcovid['CIUDAD DE UBICACION'] = [unidecode.unidecode(value).upper() for value in dfcovid['CIUDAD DE UBICACION']]
+dfcovid['DEPARTAMENTO O DISTRITO '] = [unidecode.unidecode(value).upper() for value in dfcovid['DEPARTAMENTO O DISTRITO ']]
+dfcovid['ATENCION'] = [unidecode.unidecode(value).upper() for value in dfcovid['ATENCION']]
+dfcovid['SEXO'] = [unidecode.unidecode(value).upper() for value in dfcovid['SEXO']]
+dfcovid['TIPO'] = [unidecode.unidecode(value).upper() for value in dfcovid['TIPO']]
+dfcovid['ESTADO'] = [unidecode.unidecode(value).upper() for value in dfcovid['ESTADO']]
+dfcovid['PAIS DE PROCEDENCIA'] = [unidecode.unidecode(value).upper() for value in dfcovid['PAIS DE PROCEDENCIA']]
+dfcovid['TIPO RECUPERACION'] = [unidecode.unidecode(value).upper() for value in dfcovid['TIPO RECUPERACION']]
+
+#Convertir columnas a tipo DATETIME
+dfcovid['FECHA DE NOTIFICACION'] = pd.to_datetime(dfcovid['FECHA DE NOTIFICACION'])
+dfcovid['FECHA DE MUERTE'] = pd.to_datetime(dfcovid['FECHA DE MUERTE'])
+dfcovid['FECHA DIAGNOSTICO'] = pd.to_datetime(dfcovid['FECHA DIAGNOSTICO'])
+dfcovid['FECHA RECUPERADO'] = pd.to_datetime(dfcovid['FECHA RECUPERADO'])
+dfcovid['FECHA REPORTE WEB'] = pd.to_datetime(dfcovid['FECHA REPORTE WEB'])
+
+#Crea la base final de trabajo
+dfcovid.to_csv(os.path.join('../Output', 'data_final.csv'), index=False)
+
+#llama la base final de trabajo 
+dfcovid_ciudades = pd.read_csv(os.path.join('../Output', 'data_final.csv'))
+
+# Creación de base de trabajo por ciudad (ejemplo Medellín)
+
+dfmedellin=dfcovid_ciudades[dfcovid_ciudades['CODIGO DIVIPOLA']==5001]
+
+#DATOS DIARIOS
+dfmedellin_nuevoscasos = pd.to_datetime(dfmedellin['FECHA REPORTE WEB'])
+dfmedellin_nuevoscasos_daily = dfmedellin_nuevoscasos.groupby(dfmedellin_nuevoscasos.dt.floor('d')).size().reset_index(name='CASOS')
+dfmedellin_nuevoscasos_daily.columns = ['FECHA', 'CASOS']
+
+dfmedellin_muertes= pd.to_datetime(dfmedellin['FECHA DE MUERTE'])
+dfmedellin_muertes_daily=dfmedellin_muertes.groupby(dfmedellin_muertes.dt.floor('d')).size().reset_index(name='FALLECIDOS')
+dfmedellin_muertes_daily.columns = ['FECHA', 'FALLECIDOS']
+
+dfmedellin_recu = dfmedellin[dfmedellin['FECHA DE MUERTE'].isna()] 
+#se extrae las fechas de muertes que tambien estan en recuperados
+dfmedellin_recu = pd.to_datetime(dfmedellin_recu['FECHA RECUPERADO'])
+dfmedellin_recu_daily=dfmedellin_recu.groupby(dfmedellin_recu.dt.floor('d')).size().reset_index(name='RECUPERADOS')
+dfmedellin_recu_daily.columns = ['FECHA', 'RECUPERADOS']
+
+#BASE DE TRABAJO
+db_medellin = pd.merge(dfmedellin_nuevoscasos_daily[['FECHA','CASOS']],dfmedellin_recu_daily[['FECHA','RECUPERADOS']],on='FECHA',how='left')
+db_medellin = pd.merge(db_medellin[['FECHA','CASOS','RECUPERADOS']],dfmedellin_muertes_daily[['FECHA','FALLECIDOS']],on='FECHA',how='left')
+db_medellin = db_medellin.fillna(0)
+db_medellin['CASOS_ACUMM'] = db_medellin['CASOS'].cumsum()
+db_medellin['RECUPERADOS_ACUMM'] = db_medellin['RECUPERADOS'].cumsum()
+db_medellin['FALLECIDOS_ACUMM'] = db_medellin['FALLECIDOS'].cumsum()
+db_medellin['ACTIVOS'] =db_medellin['CASOS_ACUMM']-db_medellin['RECUPERADOS_ACUMM']-db_medellin['FALLECIDOS_ACUMM']
+db_medellin['ACTIVOS_T1']=db_medellin['ACTIVOS'].shift(1)
+#db_medellin
+db_medellin.to_csv(os.path.join('../Output', 'data_medellin.csv'), index=False)
+```
+* _Etapa 2 y 3_
 ```python
 import pandas as pd
 import numpy as np
@@ -111,92 +291,79 @@ import matplotlib.pyplot as plt
 !pip install plotly==4.9.0
 import plotly.graph_objects as go
 from plotly.offline import plot
-```
-```python
+
+# Datos Nuevos casos Medellín
+df = pd.read_csv(os.path.join('../Output', 'data_medellin.csv'))
+df = df[['FECHA','CASOS']]
+df2 = pd.to_datetime(df['FECHA'])
+df.index = df2
+data_nuevoscasos = df.drop(['FECHA'], axis=1)
+
 # Datos Recuperados Acumulados Medellín
 df1 = pd.read_csv(os.path.join('../Output', 'data_medellin.csv'))
 df1 = df1[['FECHA','RECUPERADOS_ACUMM']]
 df3 = pd.to_datetime(df1['FECHA'])
 df1.index = df3
 data_recuperados = df1.drop(['FECHA'], axis=1)
-```
-```python
+
 # Datos Muertes diarias Medellín
 df4 = pd.read_csv(os.path.join('../Output', 'data_medellin.csv'))
 df4 = df4[['FECHA','FALLECIDOS']]
 df5 = pd.to_datetime(df4['FECHA'])
 df4.index = df5
 data_fallecidos_diarios = df4.drop(['FECHA'], axis=1)
-```
-```python
+
 # Datos Muertes Acumuladas Medellín
 df4 = pd.read_csv(os.path.join('../Output', 'data_medellin.csv'))
 df4 = df4[['FECHA','FALLECIDOS_ACUMM']]
 df5 = pd.to_datetime(df4['FECHA'])
 df4.index = df5
 data_fallecidos = df4.drop(['FECHA'], axis=1)
-```
-```python
+
 # Datos Activos Medellín
 df5 = pd.read_csv(os.path.join('../Output', 'data_medellin.csv'))
 df5 = df5[['FECHA','ACTIVOS']]
 df6 = pd.to_datetime(df5['FECHA'])
 df5.index = df6
 data_activos = df5.drop(['FECHA'], axis=1)
-```
-```python
+
 # Datos Confirmados Medellín
 df7 = pd.read_csv(os.path.join('../Output', 'data_medellin.csv'))
 df7 = df7[['FECHA','CASOS_ACUMM']]
 df8 = pd.to_datetime(df7['FECHA'])
 df7.index = df8
 data_confirmados = df7.drop(['FECHA'], axis=1)
-```
 
-### Construcción del modelo AUTO-ARIMA para los nuevos casos
-```python
+# Construcción modelo AUTO-ARIMA para Nuevos Casos Diarios
+
 # Data, data_train y data_test
 real = data_nuevoscasos
 train = data_nuevoscasos[:int(len(data_nuevoscasos)*(1-7/len(data_nuevoscasos)))]
 test = data_nuevoscasos[-7:]
 
+# definición del medelo -proceso de ciclo de simulación
 modelo_arima = auto_arima(train, start_p=1, d=None, start_q=1, 
                           max_p=12, max_d=8, max_q=12,
                           start_P=1, D=None, start_Q=1, 
                           max_P=12, max_D=8, max_Q=12, max_order=None, m=7, seasonal=True,
                           trace=True, supress_warnings=True, stepwise=True, random_state=20, n_fits=50)
-```
-### Selección del mejor modelo:
-```python
+
+
+# Resultados del mejor modelo
 modelo_arima.summary()
+
+
+#Diagnostico Modelo
+modelo_arima.plot_diagnostics(figsize=(14, 8))
+plt.show()
 ```
-
-
-SARIMAX Results
-|Dep. Variable:|	y|	No. Observations:|	45|
-|--------------|-----|-------------------|----|
-|Model:|	SARIMAX|	Log Likelihood|	-144.911|
-|Date:|	Sun, 06 Sep 2020|	AIC|	293.822|
-|Time:|	01:07:35|	BIC|	297.436|
-|Sample:|	0	|HQIC|	295.169|
-|       |- 45|		
-|Covariance Type:|	opg|		
-||coef|std err|z| P>abs(z) | [0.025	0.975]|
-|intercept|	19.5111|	0.904|	21.575	0.000	17.739	21.284
-|sigma2| 36.6943	6.532	5.618	0.000	23.892	49.497
-|Ljung-Box (Q):|	43.94	Jarque-Bera (JB):	1.30
-|Prob(Q):|	0.31	Prob(JB):	0.52
-
-
-![casos nuevos](https://github.com/AP-2020-1S/covid-19-sandaye/blob/master/Final%20Analitica/fig/med_corto_casosnuevos.PNG)
-
-
+* _Etapa 4_
 ```python
 #test predicción con Auto Arima
 test_prediccion_nuevoscasos = pd.DataFrame(modelo_arima.predict(n_periods = len(test)), index = test.index)
 test_prediccion_nuevoscasos.columns = ['Test predicción nuevos casos']
-```
-```python
+#test_prediccion_nuevoscasos
+
 # Grafica de predicción
 fig = go.Figure()
 fig.add_trace(go.Scatter(x=train.index, y=train['CASOS'],mode='lines',name='Train_Casos_Diarios'))
@@ -236,42 +403,121 @@ fig.update_yaxes(showgrid=True, gridwidth=1, gridcolor='#D9D8D8')
 
 fig.update_yaxes(zeroline=True, zerolinewidth=2, zerolinecolor='#474747')
 fig.show()
+
+fig.write_html('../Output/med_test_corto_nuev_casos.html')
 ```
-![corto casos nuevos](https://raw.githubusercontent.com/AP-2020-1S/covid-19-sandaye/master/Final%20Analitica/fig/5.medellin_corto%20_nuevoscasos.html?token=AQGJGC7VSEGSYS52FAPCLMS7KSCII)
+## _Esquema de desarrollo del modelo SIR_
+<img aling="center" src="fig\ESQUEMASIR.png"
+     alt="arima"
+     style="float: left; margin-right: 1000px;" />
 
-### Definir fecha de pronostico 
-```python
-fecha = pd.Series.last_valid_index(real)+datetime.timedelta(days=1)
-rango = pd.date_range(start=fecha, periods=15, freq='d')
-```
 
-### pronostico de mejor modelo a 7 días
+## _Código Python(Etapas)_
 
-```python
-#Ajuste de modelo a datos
-modelo_arima.fit(real['CASOS'])
+* _Etapa 1_
 
-#Pronostico
-pronostico_casos = modelo_arima.predict(n_periods= 15, return_conf_int = True)
-#prediccion_casos
-pronostico = pd.DataFrame(pronostico_casos[0], index = rango, columns = ['Pronostico'])
-```
+Ver la etapa 1 del esquema de desarrollo ARIMA , funciona exactamente de la misma manera.
 
-### Intervalos de confianza de predicción
+* _Etapa 2 y 3_
 
 ```python
-banda_baja = pd.Series(pronostico_casos[1][:, 0], index = rango)
-banda_alta = pd.Series(pronostico_casos[1][:, 1], index = rango)
+import numpy as np
+import pandas as pd
+import os
+import os.path
+import datetime
+from scipy.integrate import odeint
+import matplotlib.pyplot as plt
+import plotly.offline as py
+!pip install cufflinks
+import cufflinks as cf
+!pip install plotly==4.9.0
+import plotly.graph_objects as go
+from sklearn import metrics
+from sklearn.metrics import mean_squared_error
+
+#DataFrame de Activos ciudad de Medellín
+df = pd.read_csv(os.path.join('../Output', 'data_medellin.csv'))
+df = df[['FECHA','ACTIVOS']]
+df2 = pd.to_datetime(df['FECHA'])
+df.index = df2
+data_activos = df.drop(['FECHA'], axis=1)
+
+#MODELO SIR PARA VARIOS BETA Y GAMMA
+
+def modelo_SIR(beta,gamma,t):
+    N=100000
+    I0, R0=1, 0
+    S0=N - I0 - R0
+    
+    # Las ecuaciones diferenciales del modelo SIR
+    def deriv(y, t, N, beta, gamma):
+        S, I, R = y
+        dSdt = -beta * S * I / N
+        dIdt = beta * S * I / N - gamma * I
+        dRdt = gamma * I
+        return dSdt, dIdt, dRdt
+# Vector de las condiciones iniciales
+    y0 = S0, I0, R0
+# Resolver el sistema de ecuaciones diferenciales, en la secuencia de días que ya definimos
+    ret = odeint(deriv, y0, t, args=(N, beta, gamma))
+    S, I, R = ret.T
+    return (I)
+
+beta_x = 0.01
+gamma_x = 0.015
+mse_x = 1000000000000
+
+real=data_activos['ACTIVOS']
+t = np.linspace(0, len(data_activos), len(data_activos))
+
+
+for beta in np.arange(0.01,0.3,0.01):
+    for gamma in np.arange(0.015,0.3,0.005):
+        I = modelo_SIR(beta,gamma,t)
+        mse = mean_squared_error(real,I)
+        if mse < mse_x:
+            beta_x = beta
+            gamma_x = gamma
+            mse_x = mse
+print(beta_x,gamma_x,mse_x)
+
 ```
 
-### Pronostico
+* _Etapa 4_
+
 ```python
-fig_pcasos = go.Figure()
-fig_pcasos.add_trace(go.Scatter(x=real.index, y=real['CASOS'], mode='lines', line={'color': 'salmon'}, name='Casos Diarios Reales'))
-fig_pcasos.add_trace(go.Scatter(x= pronostico.index, y=pronostico['Pronostico'],mode='lines+markers',line={'color': 'rebeccapurple'},name='Pronostico Casos Diarios'))
-fig_pcasos.add_trace(go.Scatter(x=rango, y=banda_baja,mode='lines', line={'color': ' powderblue'},name='band_conf_low'))
-fig_pcasos.add_trace(go.Scatter(x=rango, y=banda_alta,mode='lines', line={'color': ' powderblue'},name='band_conf_up'))
-fig_pcasos.update_layout(
+
+#Predicción con el mejor modelo
+N =   100000
+I0, R0 = 1, 0
+S0 = N - I0 - R0
+beta, gamma = beta_x, gamma_x
+
+t1 = np.linspace(0, len(data_activos)+90, len(data_activos)+90)
+
+def deriv(y, t1, N, beta, gamma):
+    S, I, R = y
+    dSdt = -beta * S * I / N
+    dIdt = beta * S * I / N - gamma * I
+    dRdt = gamma * I
+    return dSdt, dIdt, dRdt
+
+y0 = S0, I0, R0
+
+ret = odeint(deriv, y0, t1, args=(N, beta, gamma))
+S, I, R = ret.T
+
+fecha_serie = pd.Series.first_valid_index(data_activos)
+rango_serie = pd.date_range(start=fecha_serie, periods=len(data_activos)+90, freq='d')
+
+# grafica de la predicción
+fig = go.Figure()
+fig.add_trace(go.Scatter(x=rango_serie, y=S,mode='lines',name='Susceptible'))
+fig.add_trace(go.Scatter(x=rango_serie, y=R,mode='lines',name='Recuperada y fallecidos'))
+fig.add_trace(go.Scatter(x=rango_serie, y=I,mode='lines',name='Infectada'))
+fig.add_trace(go.Scatter(x=rango_serie, y=data_activos['ACTIVOS'],mode='lines',name='Activos Reales'))
+fig.update_layout(
         hovermode='x',
         font=dict(
             family="Courier New, monospace",
@@ -300,51 +546,29 @@ fig_pcasos.update_layout(
       
 
     )
-fig_pcasos.update_xaxes(showgrid=True, gridwidth=1, gridcolor='#D9D8D8')
-fig_pcasos.update_yaxes(showgrid=True, gridwidth=1, gridcolor='#D9D8D8')
+fig.update_xaxes(showgrid=True, gridwidth=1, gridcolor='#D9D8D8')
+fig.update_yaxes(showgrid=True, gridwidth=1, gridcolor='#D9D8D8')
 
-fig_pcasos.update_yaxes(zeroline=True, zerolinewidth=2, zerolinecolor='#474747')
-fig_pcasos.show()
+fig.update_yaxes(zeroline=True, zerolinewidth=2, zerolinecolor='#474747')
+
 fig.show()
+
+fig.write_html('../Templates/med_forecast_SIR.html')
 ```
-![corto casos nuevos](https://github.com/AP-2020-1S/covid-19-sandaye/blob/master/Final%20Analitica/fig/5.medellin_corto_pronostico_nuevoscasos.html)
-
-### Construcción del modelo AUTO-ARIMA para los recuperados
-
-...
-### Construcción del modelo AUTO-ARIMA para los fallecidos día
-
-...
-### Construcción del modelo AUTO-ARIMA para los fallecidos acumulados
-...
-### Construcción del modelo AUTO-ARIMA para los activos
-...
-### Construcción del modelo AUTO-ARIMA para los confirmados
-..
-
-## BOGOTÁ
----
-## CALI
----
-## BARRANQUILLA
----
-## CARTAGENA
----
-
-
-
-
-
-
-
 
 ## Referencias
 
-Apellido, (Inicial nombre). ORGANIZACIÓN. Titulo articulo. año. Tomado de: URL
 
-ejemplo:
 
-González, M. EAFIT. Modelo SEIR para Colombia: Medidas de mitigación del virus. 2020 . Tomado de: https://www.eafit.edu.co/escuelas/economiayfinanzas/cief/Documents/informe-especial-2020-abril-2.pdf  
+
+
+
+
+
+
+
+
+ 
 
 
 
