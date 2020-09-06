@@ -68,7 +68,7 @@
       height: 100px; /* Should be removed. Only for demonstration */
       margin: 3.8px;
       box-shadow: 2px 2px #b3b2b2;
-      background-color:#f0d206;
+      background-color:#ffe025;
       border-radius:12px;
       
     }
@@ -92,7 +92,7 @@
       height: 100px; /* Should be removed. Only for demonstration */
       margin: 3.8px;
       box-shadow: 2px 2px #b3b2b2;
-      background-color:#fffc48;
+      background-color:#ffe025;
       border-radius:12px;
       
     }
@@ -150,6 +150,17 @@ select {
    margin-left: 40%;
    text-align-last:center;
 }
+
+
+iframe {
+    width: 100px !important;
+    height: 40px !important;
+    -webkit-transform: scale(1.5);
+    transform: scale(1.5);
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+    align-content: center;
+}
 select:focus{ outline: none;}
 
     </style>
@@ -176,15 +187,15 @@ select:focus{ outline: none;}
     </div>
   <div class="row">
    <div class="columnconf">
-    <p class="sansserif" style="text-align: center; color: rgb(83, 83, 83); font-size: 15px;">Total Confirmados:</p>
-        <div class="myImage" id="Bogotá"   style="display:block ; text-align: center"> <iframe id='myFrame' src="Templates\bog_confirmados.txt" height="30" width="80" scrolling="no" frameBorder="0"></iframe>   </div>
+    <p class="sansserif" style="text-align: center; color: rgb(0, 0, 0); font-size: 15px;">Total Confirmados:</p>
+        <div class="myImage" id="Bogotá"   style="display:block ; text-align: center"> <iframe id='iframe' src="Templates\bog_confirmados.txt"  height="30" width="80" scrolling="no" frameBorder="0"></iframe>   </div>
         <div class="myImage" id="Medellín"   style="display:none ; text-align: center">  <iframe id='myFrame' src="Templates\med_confirmados.txt" height="30" width="80" scrolling="no" frameBorder="0"></iframe>   </div>   
         <div class="myImage" id="Cali"   style="display:none ; text-align: center">  <iframe id='myFrame' src="Templates\cali_confirmados.txt" height="30" width="80" scrolling="no" frameBorder="0"></iframe>   </div>
         <div class="myImage" id="Barranquilla"  style="display:none ;text-align: center">  <iframe id='myFrame' src="Templates\barranquilla_confirmados.txt" height="30" width="80" scrolling="no" frameBorder="0"></iframe>   </div>
         <div class="myImage" id="Cartagena"   style="display:none ; text-align: center">  <iframe id='myFrame' src="Templates\cartagena_confirmados.txt" height="30" width="80" scrolling="no" frameBorder="0"></iframe>   </div>
    </div>
    <div class="columnrec" >
-    <p class="sansserif" style="text-align: center; color: rgb(83, 83, 83); font-size: 15px;">Total Recuperados:</p>
+    <p class="sansserif" style="text-align: center; color: rgb(0, 0, 0); font-size: 15px;">Total Recuperados:</p>
         <div class="myImage" id="Bogotá"   style="display:block ; text-align: center"> <iframe id='myFrame' src="Templates\bog_recuperados.txt" height="30" width="80" scrolling="no" frameBorder="0"></iframe>   </div>
         <div class="myImage" id="Medellín"   style="display:none ; text-align: center">  <iframe id='myFrame' src="Templates\med_recuperados.txt" height="30" width="80" scrolling="no" frameBorder="0"></iframe>   </div>   
         <div class="myImage" id="Cali"   style="display:none ; text-align: center">  <iframe id='myFrame' src="Templates\bog_recuperados.txt" height="30" width="80" scrolling="no" frameBorder="0"></iframe>   </div>
@@ -192,7 +203,7 @@ select:focus{ outline: none;}
         <div class="myImage" id="Cartagena"   style="display:none ; text-align: center">  <iframe id='myFrame' src="Templates\cartagena_recuperados.txt" height="30" width="80" scrolling="no" frameBorder="0"></iframe>   </div>
     </div>
    <div class="columnmuert" >
-    <p class="sansserif" style="text-align: center; color: rgb(83, 83, 83); font-size: 15px;">Total Fallecidos:</p>
+    <p class="sansserif" style="text-align: center; color: rgb(0, 0, 0); font-size: 15px;">Total Fallecidos:</p>
         <div class="myImage" id="Bogotá"   style="display:block ; text-align: center"> <iframe id='myFrame' src="Templates\bog_fallecidos.txt" height="30" width="80" scrolling="no" frameBorder="0"></iframe>   </div>
         <div class="myImage" id="Medellín"   style="display:none ; text-align: center">  <iframe id='myFrame' src="Templates\med_fallecidos.txt" height="30" width="80" scrolling="no" frameBorder="0"></iframe>   </div>   
         <div class="myImage" id="Cali"   style="display:none ; text-align: center">  <iframe id='myFrame' src="Templates\cali_fallecidos.txt" height="30" width="80" scrolling="no" frameBorder="0"></iframe>   </div>
@@ -268,6 +279,14 @@ select:focus{ outline: none;}
       }
     }
   </script>
+  <script type="text/javascript">
+    ;(function($) {
+          $(function() {
+              var iframe = top.frames['myFrame'].document;
+              $('p', iframe).css('font-size','20px');
+          });
+    })(jQuery);
+    </script>
 </html>
 
 
