@@ -1,3 +1,77 @@
+# Pronóstico de la evolución de casos confirmados,recuperados y muertes de SARS-CoV-2 para las 5 principales ciudades de Colombia
+
+_Santiago Gonzalez Cardona_
+
+_Dairo Alberto Cuervo Garcia_
+
+_Yeison Alexander Florez Calderon_
+
+
+# DEFINICIÓN DEL PROBLEMA
+
+Con la presencia del Coronavirus (Covid-19) en el territorio nacional y los riesgos que eso supone para la salud de los colombianos, fue necesario para el Gobierno Nacional adoptar disposiciones normativas de emergencia que propendan por la prevención, protección y garantía en el acceso a servicios de salud de los mismos.Decisiones que evidentemente han dejado daños profundos en la estructura económica del país.
+
+Para el segundo semestre del 2020 el  PIB nacional cayó casi un 15%. Esta contracción económica ha sido la más profunda en la historia del país y ha dejado por delante un aumento significativo de las tasas de desempleo y  un deterioro en la calidad de vida de los colombianos.
+
+Hasta finales de agosto del 2020 habían más de 650.000 casos confirmados , 498.000 recuperados y  aproximadamente 20.000 muertes.Adicionalmente ,la incertidumbre asociada con el comportamiento del virus en el mediano y largo plazo es uno de los principales problemas de interés.Información que es de vital importancia para tomar decisiones efectivas a nivel gubernamental como por ejemplo , temas de infraestructura , políticas de confinamiento  y decisiones relacionadas con el comercio internacional  y/o  apertura económica.
+
+
+# DEFINICIÓN DEL PROBLEMA DE ANALÍTICA
+
+Para la toma de decisiones efectivas es necesario que el producto final haya sido construido o trazado bajo metodologías estructuradas , modelos precisos , confiables y debidamente soportados  donde  la evaluación de los  modelos sea cíclica y permita mejorar  constantemente  el resultado final. 
+
+Teniendo en cuenta lo anterior , las pregunta que nos llevará a trazar la metodología del proyecto son: 
+¿ Que modelo de pronóstico es ideal para proyectar información confiable en el corto o mediano plazo de los casos confirmados del  SARS-CoV-2 con sus respectivos desenlaces(recuperados o fallecidos)  para  las 5 principales ciudades de Colombia?
+¿Qué metodología es la adecuada para permitir que el producto de datos sea autosuficiente , confiable y duradero?
+
+En la literatura existen diferentes técnicas de pronóstico para las series de tiempo como por ejemplo: regresiones lineales , modelos autorregresivos y de medias móviles (ARIMA) , redes neuronales , modelo SIR etc. Estas técnicas poseen características especiales y unos con mejores ajustes que otros según el problema que sea planteado.Adicionalmente existen metodologías para la construcción de proyectos como la CRISP-DM , metodología que permite que el producto tenga unas fases de construcción definidas obteniendo así un mejor resultado.
+
+## OBJETIVO
+El objetivo de este proyecto es la predicción de corto y mediano plazo del total de casos confirmados, los nuevos casos, los casos activos, recuperados y muertes para las 5 principales ciudades de Colombia, utilizando técnicas estadísticas, de inteligencia artificial o modelos híbridos.
+
+# DATOS
+La fuente principal de información proviene de la página oficial del gobierno nacional datos.gov.co la cual contiene información actualizada dia a dia de los casos confirmados del  SARS-CoV-2 en el territorio nacional.
+
+## Estructura de los datos
+
+|  Variable             |    Tipo de dato         |  
+|-----------------------|-------------------------|
+|ID CASO                |  NUMÉRICO               |
+|FECHA DE NOTIFICACIÓN  |  FECHA                  |
+|CÓDIGO DIVIPOLA        |  NUMÉRICO               |
+|CIUDAD DE UBICACIÓN    |  CATEGÓRICA             |
+|DEPARTAMENTO O DISTRITO|  CATEGÓRICA             |
+|ATENCIÓN               |  CATEGÓRICA (RECUPERADO , FALLECIDO , CASA , HOSPITAL , HOSPITAL UCI )                  |
+|EDAD                   |  NUMÉRICO               |
+|SEXO                   |  CATEGÓRICA (F.M)       |
+|TIPO                   |  CATEGÓRICA (IMPORTADO , RELACIONADO , EN ESTUDIO)               |
+|ESTADO                 |  CATEGÓRICA (ASINTOMÁTICO ,LEVE , MODERADO , GRAVE , FALLECIDO)       |
+|PAÍS PROCEDENCIA       |  CATEGÓRICA             |
+|FECHA DE MUERTE        |  FECHA                  |
+|FECHA DIAGNÓSTICO      |  FECHA                  |
+|FECHA RECUPERADO       |  FECHA                  |
+|FECHA REPORTADO WEB    |  FECHA                  |
+|CÓDIGO DEPARTAMENTO    |  NUMÉRICO               |
+|CÓDIGO PAÍS            |  NUMÉRICO               |
+|PERTENENCIA ÉTNICA     |  CATEGÓRICA             |
+
+
+
+## Obtención y limpieza de datos
+
+Con ayuda de un algoritmo de programación (URL indexing) los datos se descargan directamente de la fuente principal para ser almacenados y usados por el producto de datos.
+
+Para la limpieza de los datos erróneos o faltantes se usaron diferentes técnicas de limpieza y homogeneización con el fin de arrojar una base de datos sólida y lista para hacer el trabajo de análisis.  Algunas de las técnicas usadas son la siguientes:
+
+Homogeneización de caracteres 
+Selección de datos relevantes  
+Eliminación de datos innecesarios 
+Cambios de tipo de datos
+
+## Análisis Exploratorio de los datos
+
+
+
 
 # 1. DESPLIEGUE DEL MODELO
 ## 1.2 Modelo ARIMA
