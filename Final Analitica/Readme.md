@@ -127,8 +127,33 @@ _Ver código exploratio de datos en el siguiente link:_
 
 
 
-### 
-situación de cada ciudad (grafica)
+### Comportamiento SARS-COV-2 por ciudad
+
+#### Medellín
+
+![Comportamiento SARS-COV-2](https://github.com/AP-2020-1S/covid-19-sandaye/blob/master/Final%20Analitica/fig/totales_medellin.png)
+
+
+#### Bogotá
+
+![Comportamiento SARS-COV-2](https://github.com/AP-2020-1S/covid-19-sandaye/blob/master/Final%20Analitica/fig/totales_bogota.png)
+
+
+#### Cali
+
+![Comportamiento SARS-COV-2](https://github.com/AP-2020-1S/covid-19-sandaye/blob/master/Final%20Analitica/fig/totales_cali.png)
+
+
+#### Barranquilla
+
+![Comportamiento SARS-COV-2](https://github.com/AP-2020-1S/covid-19-sandaye/blob/master/Final%20Analitica/fig/totales_barranquilla.png)
+
+
+
+#### Cartagena
+
+![Comportamiento SARS-COV-2](https://github.com/AP-2020-1S/covid-19-sandaye/blob/master/Final%20Analitica/fig/totales_cartagena.png)
+
 
 total infectados en tabla
 
@@ -137,6 +162,9 @@ total infectados en tabla
 
 ![Muestras diarias procesadas](https://github.com/AP-2020-1S/covid-19-sandaye/blob/master/Final%20Analitica/fig/puebas_procesadas_diarias.png)
 
+En los últimos 20 días, con corte al 5 de septiembre, se ha observado una disminución conciderable en el número de pruebas diarias realizadas, esto es, pasaron de 40.000 prubeas diarias a cerca de 25.000 diarias, lo que implica una reducción cercana al 40%.
+
+Este es un dato relevante en el análsis de los resultados de los modelos de predicción de corto y mediano plazo, dado que dicha reducción también se ve reflejada en la tendencia descendente de los casos confirmados y fallecidos. Por lo que es muy problable que exista un subregistro en la base de datos y no reflejen de forma exacta la realidad de la pandemia.  
 
 
 
