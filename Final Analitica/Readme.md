@@ -120,6 +120,11 @@ Para el análisis de los datos se tomaron las variables que tenian mayor grado d
 
 La tabla presenta las variables selecionadas para cada categoria de análisis, de estas se construyen las subsecuentes variables que responden a valores acumulados u operaciones de las mismas.
 
+
+_Ver código de creación de archivos de trabajo en el siguiente link:_
+
+[Crear_archivos_trabajo](https://github.com/AP-2020-1S/covid-19-sandaye/blob/master/Final%20Analitica/Notebooks/3.dataframe_ciudades.ipynb "Jupyter notebook")
+
 ### 
 situación de cada ciudad (grafica)
 
@@ -128,9 +133,6 @@ total infectados en tabla
 muestras procesadas, influye en el pronostico
 
 
-
-
-##########
 
 
 
