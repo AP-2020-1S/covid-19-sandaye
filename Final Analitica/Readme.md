@@ -27,10 +27,11 @@ Hasta finales de agosto del 2020 habían más de 650.000 casos confirmados , 498
 Para la toma de decisiones efectivas es necesario que el producto final haya sido construido o trazado bajo metodologías estructuradas , modelos precisos , confiables y debidamente soportados  donde  la evaluación de los  modelos sea cíclica y permita mejorar  constantemente  el resultado final. 
 
 Teniendo en cuenta lo anterior , las pregunta que nos llevará a trazar la metodología del proyecto son: 
-¿ Que modelo de pronóstico es ideal para proyectar información confiable en el corto o mediano plazo de los casos confirmados del  SARS-CoV-2 con sus respectivos desenlaces(recuperados o fallecidos)  para  las 5 principales ciudades de Colombia?
-¿Qué metodología es la adecuada para permitir que el producto de datos sea autosuficiente , confiable y duradero?
+1. ¿ Que modelo de pronóstico es ideal para proyectar información confiable en el corto o mediano plazo de los casos confirmados del  SARS-CoV-2 con sus respectivos desenlaces(recuperados o fallecidos)  para  las 5 principales ciudades de Colombia?
 
-En la literatura existen diferentes técnicas de pronóstico para las series de tiempo como por ejemplo: regresiones lineales , modelos autorregresivos y de medias móviles (ARIMA) , redes neuronales , modelo SIR etc. Estas técnicas poseen características especiales y unos con mejores ajustes que otros según el problema que sea planteado.Adicionalmente existen metodologías para la construcción de proyectos como la CRISP-DM , metodología que permite que el producto tenga unas fases de construcción definidas obteniendo así un mejor resultado.
+2. ¿Qué metodología es la adecuada para permitir que el producto de datos sea autosuficiente , confiable y duradero?
+
+En la literatura existen diferentes técnicas de pronóstico para las series de tiempo como por ejemplo: regresiones lineales , modelos autorregresivos y de medias móviles (ARIMA) , redes neuronales , modelo SIR entre otros. Estas técnicas poseen características especiales y unos con mejores ajustes que otros según el problema que sea planteado. Adicionalmente existen metodologías para la construcción de proyectos como la CRISP-DM , metodología que permite que el producto tenga unas fases de construcción definidas obteniendo así un mejor resultado.
 
 ## OBJETIVO
 El objetivo de este proyecto es la predicción de corto y mediano plazo del total de casos confirmados, los nuevos casos, los casos activos, recuperados y muertes para las 5 principales ciudades de Colombia, utilizando técnicas estadísticas, de inteligencia artificial o modelos híbridos.
@@ -65,14 +66,22 @@ La fuente principal de información proviene de la página oficial del gobierno 
 
 ## Obtención y limpieza de datos
 
-Con ayuda de un algoritmo de programación (URL indexing) los datos se descargan directamente de la fuente principal para ser almacenados y usados por el producto de datos.
+### Descarga de datos
 
-Para la limpieza de los datos erróneos o faltantes se usaron diferentes técnicas de limpieza y homogeneización con el fin de arrojar una base de datos sólida y lista para hacer el trabajo de análisis.  Algunas de las técnicas usadas son la siguientes:
+Se construyo una rutina que permite la descarga automatica de los datos directamente desde la fuente del Gobierno Nacional, la cual genera un archivo de datos crudos en scv que son almacenados y usados por las rutinas posteriores.
 
-Homogeneización de caracteres 
-Selección de datos relevantes  
-Eliminación de datos innecesarios 
-Cambios de tipo de datos
+_Ver rutina de descarga de datos en el siguiente link:_
+
+[Rutina_descarga_datos](https://github.com/AP-2020-1S/covid-19-sandaye/blob/master/Final%20Analitica/Notebooks/1.down_data.ipynb "Jupyter notebook")
+
+
+### Limpieza de datos
+
+Tras un análisis de las variables del arrchivo principal de datos se realiza la selección de variables a usar, la limpieza de los datos erróneos o faltantes, correción formato y fuente de datos, Homogeneización de caracteres, Selección de datos relevantes entre otras.
+
+_Ver rutina de limpieza de datos en el siguiente link:_
+
+[Rutina_limpieza_datos](https://github.com/AP-2020-1S/covid-19-sandaye/blob/master/Final%20Analitica/Notebooks/2.Clear_data.ipynb "Jupyter notebook")
 
 ## Análisis Exploratorio de los datos
 
@@ -335,7 +344,7 @@ Apellido, (Inicial nombre). ORGANIZACIÓN. Titulo articulo. año. Tomado de: URL
 
 ejemplo:
 
-González, M. EAFIT. Modelo SEIR para Colombia: Medidas de mitigación del virus. 2020 . Tomado de : https://www.eafit.edu.co/escuelas/economiayfinanzas/cief/Documents/informe-especial-2020-abril-2.pdf  
+González, M. EAFIT. Modelo SEIR para Colombia: Medidas de mitigación del virus. 2020 . Tomado de: https://www.eafit.edu.co/escuelas/economiayfinanzas/cief/Documents/informe-especial-2020-abril-2.pdf  
 
 
 
