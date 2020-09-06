@@ -4,11 +4,13 @@
 
 # Pronóstico de la evolución de casos confirmados,recuperados y muertes de SARS-CoV-2 para las 5 principales ciudades de Colombia
 
-_Santiago Gonzalez Cardona_
+### Equipo de trabajo:
 
-_Dairo Alberto Cuervo Garcia_
+* _Santiago Gonzalez Cardona_
 
-_Yeison Alexander Florez Calderon_
+* _Dairo Alberto Cuervo Garcia_
+
+* _Yeison Alexander Florez Calderon_
 
 
 # DEFINICIÓN DEL PROBLEMA
@@ -327,6 +329,13 @@ fig.show()
 
 
 
+## Referencias
+
+Apellido, (Inicial nombre). ORGANIZACIÓN. Titulo articulo. año. Tomado de: URL
+
+ejemplo:
+
+González, M. EAFIT. Modelo SEIR para Colombia: Medidas de mitigación del virus. 2020 . Tomado de : https://www.eafit.edu.co/escuelas/economiayfinanzas/cief/Documents/informe-especial-2020-abril-2.pdf  
 
 
 
