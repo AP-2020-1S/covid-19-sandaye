@@ -399,8 +399,51 @@ Toda la rutina se ejecuta de forma automatica y en orden desde el archivo [RUN.i
 
 
 
+# DESPLIEGUE
 
 
+## Manejo del repositorio
+* Se debe clonar el repositorio localmente.
+En el siguiente link se encuentra el repositorio que contiene el proyecto de predicción para el SARS-COV-2: [Repositorio](https://meet.google.com/linkredirect?authuser=0&dest=https%3A%2F%2Fgithub.com%2FAP-2020-1S%2Fcovid-19-sandaye "Abrir")
+
+* Abrir la carpeta "Final análitica" del repositorio y en esta encontrada el archivo "Readme.md", en el cual esta el desarrollo de los modelos de predicción para el SARS-COV-2.
+* Abrir la carpeta "Notebooks" contenido en la carpeta "Final análitica".
+### Función de las carpetas dentro del repositorio
+* Final Análitica: contienen las carpetas "Input_data", "Notebooks", "Output", "Templates", "Fig y el archivo "Readme.md".
+* Input_data: Se almacenan los archivos tipo csv con los datos crudos descargados de la fuente.
+* Notebooks: Continene todas las rutinas de código en Python para el desarrollo de los modelos de predicción.
+* Output: Se almacenan los archivos que han sido transformados y procesados con las rutinas de código.
+* Templates: Contiene los archivos insumo del dashboard.
+* Fig: Contienen las imagenes que se usan para la elaboración del archivo "Readme.md", donde esta contenido el análisis completo de los modelos.
+
+En esta carpeta encontrada todas las rutinas del desarrollo de los modelos de predicción, estas pueden ser ejecutadas como se indica en el siguiente paso.
+
+## Ejecutar las rutinas
+Toda la rutina se ejecuta de forma automatica y en orden desde el archivo [RUN.ipynb](https://github.com/AP-2020-1S/covid-19-sandaye/blob/master/Final%20Analitica/Notebooks/RUN.ipynb "Jupyter notebook"), que contiene todas las rutinas del proyecto.
+
+Despues de que el archivo Run.ipynb ejecute todas las rutinas se actualiza la información contenida en las carpetas que son insumo para el dashboard de forma automática.
+
+## [Dashboard](https://meet.google.com/linkredirect?authuser=0&dest=https%3A%2F%2Fsangonzalez.github.io%2F "Abrir Dashboard")
+
+En el despliegue del modelo se entregan los resultados obtenidos de la proyección de SARS-COV-2, para lo que se creó un dashboard utilizando HTML donde se visualiza la información y la proyección automáticamente de los nuevos casos, casos confirmados, recuperados, fallecidos y activos, para su lanzamiento se usó la plataforma GitHub Pages que permite albergar sitios web directamente desde un repositorio de GitHub.
+
+### Contenido del Dashboard
+* Banner para visuaizar por cada una de las 5 ciudades principales objeto de estudio.
+* Datos relevantes de cada ciudad respecto al SARS-COV-2: Total acumulado casos confirmados, total acumulado casos recuperados y total acumulado casos fallecidos.
+* Graficos interactivos con los pronósticos a corto y medianp plazo para el comportamiento del SARS-COV-2.
+    * Pronóstico de mediano plazo usando el modelo SIR (90 días)
+    * Pronóstico de corto plazo usando el modelo ARIMA (15 días)
+
+La visualización de dashboard se puede realizar en el siguiente link: [Dashboard](https://meet.google.com/linkredirect?authuser=0&dest=https%3A%2F%2Fsangonzalez.github.io%2F "Abrir Dashboard")
+
+La rutina completa es ejecutable todos los días despues de las 10 pm, hora en la que se actualizan los datos historicos de las 5 cuidades pronósticadas.
+
+Los modelos de corto y mediano plazo estan sujetos a recalibración debido a cambios en las dinámicas del pais, como la de implementación de politicas de apertura, cierre, avance del virus y comportamiento social.
+
+la vida útil de los modelos de predicción estan determinados por factores exogénos , tales como:
+* Encontrar la vacuna que termiene con el SARS-COV-2.
+* Cuando se adquiera inmunidad de la población por su contagio total.
+* Por politicas de país que ya no permitan la actualización de los datos.
 
 
 ## Referencias
