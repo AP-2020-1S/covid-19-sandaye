@@ -127,7 +127,15 @@ _Ver código exploratio de datos en el siguiente link:_
 
 
 
-### Comportamiento SARS-COV-2 por ciudad
+### Comportamiento SARS-COV-2 por cada ciudad principal
+
+Se evalua las categorias de análisis en cada una de las ciudades principales, buscando comportamientos que permitan entender de forma general el avance del virus por cada ciudad. Los patrones que se identifican en caunto al comportamiento de los "picos" de la pandemia son claves para delimitar los datos de prueba y entrenamiento para la construcción de un modelo que permita un pronostico confiable.
+
+### Tabla de resumen Covid para las cinco ciudades principales
+* _Con corte al 5 de septiembre del 2020_
+
+![Tabla resumen de ciudades - Covid](https://github.com/AP-2020-1S/covid-19-sandaye/blob/master/Final%20Analitica/fig/tabla_total_ciudades.png)
+
 
 #### Medellín
 
@@ -155,9 +163,6 @@ _Ver código exploratio de datos en el siguiente link:_
 ![Comportamiento SARS-COV-2](https://github.com/AP-2020-1S/covid-19-sandaye/blob/master/Final%20Analitica/fig/totales_cartagena.png)
 
 
-total infectados en tabla
-
-
 ### Muestras procesadas
 
 ![Muestras diarias procesadas](https://github.com/AP-2020-1S/covid-19-sandaye/blob/master/Final%20Analitica/fig/puebas_procesadas_diarias.png)
@@ -165,8 +170,6 @@ total infectados en tabla
 En los últimos 20 días, con corte al 5 de septiembre, se ha observado una disminución conciderable en el número de pruebas diarias realizadas, esto es, pasaron de 40.000 prubeas diarias a cerca de 25.000 diarias, lo que implica una reducción cercana al 40%.
 
 Este es un dato relevante en el análsis de los resultados de los modelos de predicción de corto y mediano plazo, dado que dicha reducción también se ve reflejada en la tendencia descendente de los casos confirmados y fallecidos. Por lo que es muy problable que exista un subregistro en la base de datos y no reflejen de forma exacta la realidad de la pandemia.  
-
-
 
 
 # METODOLOGIAS PROPUESTAS
