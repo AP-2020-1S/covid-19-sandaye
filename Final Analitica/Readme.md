@@ -175,8 +175,9 @@ Este es un dato relevante en el análsis de los resultados de los modelos de pre
 # METODOLOGIAS PROPUESTAS
 Para  este proyecto se proponen las siguientes metodologías de pronóstico 
 
-## 1. _Modelo de pronóstico  de corto  plazo_
-## 1.1 _Modelo ARIMA_
+## _Modelo de pronóstico  de corto  plazo_
+###  _Modelo ARIMA_
+
 En 1970, Box y Jenkins desarrollaron un cuerpo metodológico destinado a identificar, estimar y diagnosticar modelos dinámicos de series temporales en los que la variable tiempo juega un papel fundamental. Una parte importante de esta metodología está pensada para liberar al investigador económetra de la tarea de especificación de los modelos dejando que los propios datos temporales de la variable a estudiar nos indiquen las características de la estructura probabilística subyacente.
 
 El inconveniente es que, al renunciar a la inclusión de un conjunto más amplio de variables explicativas, no atendemos a las relaciones que sin duda existen entre casi todas las variables económicas perdiendo capacidad de análisis al tiempo que renunciamos, implícitamente, al estudio teórico previo del fenómeno y a su indudable utilidad. Sin embargo , los modelos ARIMA son de gran utilidad en muchos campos. En este proyecto elegimos usar este modelo gracias a su gran potencial y simpleza tanto en interpretación como en aplicabilidad
@@ -221,8 +222,8 @@ Variables a predecir por el modelo ARIMA nombrado anteriormente:
 |Muertes (Diario)               |  Serie de Tiempo                |
 
 
-## _2. Modelo de pronóstico  de mediano  plazo_
-## _2.1 Modelo SIR_
+## _Modelo de pronóstico  de mediano  plazo_
+### _Modelo SIR_
 Los modelos SIR fueron desarrollados por Kermack y McKendrick en 1927 y han sido aplicados en diversos escenarios de epidemias. Estos modelos estiman el número teórico de personas susceptibles de enfermar (susceptibles), el número de enfermos (infectados) y el número de personas que ya no pueden transmitir la enfermedad (Recuperados o fallecidos), en una población a lo largo del tiempo. Los supuestos básicos de los modelos SIR son: a. La población es homogénea y de tamaño fijo; b. En un momento dado, cada individuo sólo puede pertenecer a uno de los siguientes conjuntos: infectados, susceptibles o resistentes; c. La interacción entre los individuos es aleatoria, y; d. No hay intervención externa que cambie la tasa de contacto de la población. En estos modelos se asume que la población por estado (N) es constante y que el número de individuos susceptibles S(t), infectados I(t) y fallecidos R(t) son variables dependientes del tiempo, de manera que:
 
 <img aling="center" src="fig\SIR.png"
@@ -242,10 +243,10 @@ Dado que el tamaño de la población es fijo, se puede reducir el sistema de ecu
 
 
 # DESARROLLO DE LOS MODELOS
+
 ## _Esquema de desarrollo del modelo ARIMA_
-<img aling="center" src="fig\ESQUEMAARIMA.png"
-     alt="arima"
-     style="float: left; margin-right: 1000px;" />
+
+![Esquema](https://github.com/AP-2020-1S/covid-19-sandaye/blob/master/Final%20Analitica/fig/ESQUEMAARIMA.PNG)
 
 ## _Código Python(Etapas)_
 
