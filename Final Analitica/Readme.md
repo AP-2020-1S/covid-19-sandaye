@@ -1,7 +1,7 @@
 
 # PRONÓSTICO DE LA EVOLUCIÓN DE CASOS CONFIRMADOS, RECUPERADOS Y MUERTES POR SARS-COV-2 PARA LAS 5 PRINCIPALES CIUDADES DE COLOMBIA
 
-##### [Dashboard](https://meet.google.com/linkredirect?authuser=0&dest=https%3A%2F%2Fsangonzalez.github.io%2F "Abrir Dashboard")
+##### [Dashboard](https://dacuervog.github.io/ "Abrir Dashboard")
 
 ### Equipo de trabajo:
 
@@ -394,7 +394,7 @@ Toda la rutina se ejecuta de forma automatica y en orden desde el archivo [RUN.i
 
     * Auto-ajuste modelo SIR para Cartagena
         
-        [Modelo Cartagena mediano plazo](https://github.com/AP-2020-1S/covid-19-sandaye/blob/master/Final%20Analitica/Notebooks/14.cartagena_SIR_mediano.ipynb "Jupyter notebook")-2020-1S/covid-19-sandaye/blob/master/Final%20Analitica/Notebooks/9.cartagena_corto.ipynb "Jupyter notebook")
+        [Modelo Cartagena mediano plazo](https://github.com/AP-2020-1S/covid-19-sandaye/blob/master/Final%20Analitica/Notebooks/14.cartagena_SIR_mediano.ipynb "Jupyter notebook")
 
 
 
@@ -403,7 +403,7 @@ Toda la rutina se ejecuta de forma automatica y en orden desde el archivo [RUN.i
 
 ## Manejo del repositorio
 * Se debe clonar el repositorio localmente.
-En el siguiente link se encuentra el repositorio que contiene el proyecto de predicción para el SARS-COV-2: [Repositorio](https://meet.google.com/linkredirect?authuser=0&dest=https%3A%2F%2Fgithub.com%2FAP-2020-1S%2Fcovid-19-sandaye "Abrir")
+En el siguiente link se encuentra el repositorio que contiene el proyecto de predicción para el SARS-COV-2: [Repositorio](https://github.com/AP-2020-1S/covid-19-sandaye "Abrir")
 
 * Abrir la carpeta "Final análitica" del repositorio y en esta encontrada el archivo "Readme.md", en el cual esta el desarrollo de los modelos de predicción para el SARS-COV-2.
 * Abrir la carpeta "Notebooks" contenido en la carpeta "Final análitica".
@@ -422,7 +422,7 @@ Toda la rutina se ejecuta de forma automatica y en orden desde el archivo [RUN.i
 
 Despues de que el archivo Run.ipynb ejecute todas las rutinas se actualiza la información contenida en las carpetas que son insumo para el dashboard de forma automática.
 
-## [Dashboard](https://meet.google.com/linkredirect?authuser=0&dest=https%3A%2F%2Fsangonzalez.github.io%2F "Abrir Dashboard")
+## [Dashboard](https://sangonzalez.github.io/ "Abrir Dashboard")
 
 En el despliegue del modelo se entregan los resultados obtenidos de la proyección de SARS-COV-2, para lo que se creó un dashboard utilizando HTML donde se visualiza la información y la proyección automáticamente de los nuevos casos, casos confirmados, recuperados, fallecidos y activos, para su lanzamiento se usó la plataforma GitHub Pages que permite albergar sitios web directamente desde un repositorio de GitHub.
 
@@ -433,7 +433,7 @@ En el despliegue del modelo se entregan los resultados obtenidos de la proyecci�
     * Pronóstico de mediano plazo usando el modelo SIR (90 días)
     * Pronóstico de corto plazo usando el modelo ARIMA (15 días)
 
-La visualización de dashboard se puede realizar en el siguiente link: [Dashboard](https://meet.google.com/linkredirect?authuser=0&dest=https%3A%2F%2Fsangonzalez.github.io%2F "Abrir Dashboard")
+La visualización de dashboard se puede realizar en el siguiente link: [Dashboard](https://yaflorezc.github.io/ "Abrir Dashboard")
 
 La rutina completa es ejecutable todos los días despues de las 10 pm, hora en la que se actualizan los datos historicos de las 5 cuidades pronósticadas.
 
