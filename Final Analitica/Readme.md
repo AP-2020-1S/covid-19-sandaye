@@ -328,11 +328,26 @@ Toda la rutina se ejecuta de forma automatica y en orden desde el archivo [RUN.i
 
 ## _Código Python(Etapas)_
 
-* _Etapa 1_
+* _Etapa 1_: Actualización de las series de tiempo historicas con una única rutina
 
-Ver la etapa 1 del esquema de desarrollo ARIMA , funciona exactamente de la misma manera.
+    * Primero se hace la descarga de datos: 
+    
+        _Ver rutina de descarga de datos en el siguiente link:_
+    
+    [Rutina_descarga_datos](https://github.com/AP-2020-1S/covid-19-sandaye/blob/master/Final%20Analitica/Notebooks/1.down_data.ipynb "Jupyter notebook")
 
-* _Etapa 2 y 3_
+    * Posteriormente se ejecuta la rutina de limpieza de datos:
+        _Ver rutina de limpieza de datos en el siguiente link:_
+
+    [Rutina_limpieza_datos](https://github.com/AP-2020-1S/covid-19-sandaye/blob/master/Final%20Analitica/Notebooks/2.Clear_data.ipynb "Jupyter notebook")
+
+    * Por último se crean los archivos de trabajo:
+        _Ver código de creación de archivos de trabajo en el siguiente link:_
+
+    [Crear_archivos_trabajo](https://github.com/AP-2020-1S/covid-19-sandaye/blob/master/Final%20Analitica/Notebooks/3.dataframe_ciudades.ipynb "Jupyter notebook")
+
+
+* _Etapa 2 y 3_: Ajuste del modelo SIR a la serie de tiempo
 
 ```python
 import numpy as np
