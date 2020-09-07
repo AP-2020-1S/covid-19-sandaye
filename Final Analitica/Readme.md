@@ -328,6 +328,8 @@ Toda la rutina se ejecuta de forma automatica y en orden desde el archivo [RUN.i
 
 ## _Código Python(Etapas)_
 
+Toda la rutina se ejecuta de forma automatica y en orden desde el archivo [RUN.ipynb](https://github.com/AP-2020-1S/covid-19-sandaye/blob/master/Final%20Analitica/Notebooks/RUN.ipynb "Jupyter notebook"), que contiene todas las rutinas del proyecto.
+
 * _Etapa 1_: Actualización de las series de tiempo historicas con una única rutina
 
     * Primero se hace la descarga de datos: 
@@ -348,6 +350,63 @@ Toda la rutina se ejecuta de forma automatica y en orden desde el archivo [RUN.i
 
 
 * _Etapa 2 y 3_: Ajuste del modelo SIR a la serie de tiempo
+
+    * A continuación se presentan las rutinas de ajuste deL modelo SIR para los datos historicos del SARS-COV-2 de las cinco principales ciudades, donde se construyo una rutina para la optimización de los parámetros "beta" y "gamma", esto se logro calculando el error cuadratico medio "mse" de la serie origanl y del modelo SIR, es decir que, se hizo una comparación entre varios modelos SIR variando estos párametros en una rango extenso por el método de tanteo para encontrar el menor error entre el modelo SIR y los datos originales(reales).
+
+    * Auto-ajuste modelo SIR para Medellín
+
+        [Modelo Medellín mediano plazo](https://github.com/AP-2020-1S/covid-19-sandaye/blob/master/Final%20Analitica/Notebooks/10.medellin_SIR_mediano.ipynb "Jupyter notebook")
+
+    * Auto-ajuste modelo SIR para Bogotá
+        
+        [Modelo Bogotá mediano plazo](https://github.com/AP-2020-1S/covid-19-sandaye/blob/master/Final%20Analitica/Notebooks/11.bogota_SIR_mediano.ipynb "Jupyter notebook")
+
+    * Auto-ajuste modelo SIR para Cali
+        
+        [Modelo Cali mediano plazo](https://github.com/AP-2020-1S/covid-19-sandaye/blob/master/Final%20Analitica/Notebooks/12.cali_SIR_mediano.ipynb "Jupyter notebook")
+
+    * Auto-ajuste modelo SIR para Barranquilla
+        
+        [Modelo Barranquilla mediano plazo](https://github.com/AP-2020-1S/covid-19-sandaye/blob/master/Final%20Analitica/Notebooks/13.barranquilla_SIR_mediano.ipynb "Jupyter notebook")
+
+    * Auto-ajuste modelo SIR para Cartagena
+        
+        [Modelo Cartagena mediano plazo](https://github.com/AP-2020-1S/covid-19-sandaye/blob/master/Final%20Analitica/Notebooks/14.cartagena_SIR_mediano.ipynb "Jupyter notebook")
+
+* _Etapa 4_: Pronóstico 
+
+    * A continuación se presentan las rutinas de pronóstico del modelo SIR para los casos nuevos, confirmados, recuperados, fallecidos y activos de SARS-COV-2 para las cinco principales ciudades, usando los mejores beta y gamma encontrados en la etapa anterior.
+    
+   * Auto-ajuste modelo SIR para Medellín
+
+        [Modelo Medellín mediano plazo](https://github.com/AP-2020-1S/covid-19-sandaye/blob/master/Final%20Analitica/Notebooks/10.medellin_SIR_mediano.ipynb "Jupyter notebook")
+
+    * Auto-ajuste modelo SIR para Bogotá
+        
+        [Modelo Bogotá mediano plazo](https://github.com/AP-2020-1S/covid-19-sandaye/blob/master/Final%20Analitica/Notebooks/11.bogota_SIR_mediano.ipynb "Jupyter notebook")
+
+    * Auto-ajuste modelo SIR para Cali
+        
+        [Modelo Cali mediano plazo](https://github.com/AP-2020-1S/covid-19-sandaye/blob/master/Final%20Analitica/Notebooks/12.cali_SIR_mediano.ipynb "Jupyter notebook")
+
+    * Auto-ajuste modelo SIR para Barranquilla
+        
+        [Modelo Barranquilla mediano plazo](https://github.com/AP-2020-1S/covid-19-sandaye/blob/master/Final%20Analitica/Notebooks/13.barranquilla_SIR_mediano.ipynb "Jupyter notebook")
+
+    * Auto-ajuste modelo SIR para Cartagena
+        
+        [Modelo Cartagena mediano plazo](https://github.com/AP-2020-1S/covid-19-sandaye/blob/master/Final%20Analitica/Notebooks/14.cartagena_SIR_mediano.ipynb "Jupyter notebook")-2020-1S/covid-19-sandaye/blob/master/Final%20Analitica/Notebooks/9.cartagena_corto.ipynb "Jupyter notebook")
+
+
+
+
+
+
+
+
+
+
+
 
 ```python
 import numpy as np
