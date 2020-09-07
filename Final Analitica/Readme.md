@@ -469,6 +469,12 @@ fig.write_html('../Templates/med_forecast_SIR.html')
 
 ## Referencias
 
+Manrique, F., et al.(2020). Modelo SIR de la pandemia de Covid-19 en Colombia. Revista de Salud Pública, 2020, vol. 22, p. 1-9. http://dx.doi.org/10.15446/rsap.v22.85977
+
+De Arce, R., Mahía,R.(2003). Modelos Arima [Archivo PDF]. https://d1wqtxts1xzle7.cloudfront.net/53321017/Box-Jenkins.PDF?1496089235=&response-content-disposition=inline%3B+filename%3DMODELOS_ARIMA.pdf&Expires=1599448076&Signature=KXM6GabDJdqsv01R5KF2s3tpON82zSJne9rwwloQQht36d75UWEjhJ5WvMmo-fGaS7tZPpvXgi2TeOs29qwDAMJ1o3~K7AsnrsLS1H3AR-TgFyHslILSqrlfIyFS9LU-6DXmZV6YGF7gxJMp~RX63PxcS1QA-MeVKkWZxz9EYLBHTel44BhN9OjOum575M0CpCurotPNwIAgw55x2HQdgyFqVYHdFF5XVf58ONcyvSxNQJD0bgOCpPPgjaIzEd7tOaVPFU~hP5GfwLTEOSakQM9GC31Q0S6RDovRIXxG8ppnarroKKGgP2tIavth9iaiPd~xZaIRpTjD4az1ESR1UA__&Key-Pair-Id=APKAJLOHF5GGSLRBV4ZA
+
+jdvelasq.github.io/courses/(2019). Analítica Predictiva https://jdvelasq.github.io/courses/
+
 
 
 
