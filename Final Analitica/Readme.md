@@ -127,7 +127,15 @@ _Ver código exploratio de datos en el siguiente link:_
 
 
 
-### Comportamiento SARS-COV-2 por ciudad
+### Comportamiento SARS-COV-2 por cada ciudad principal
+
+Se evalua las categorias de análisis en cada una de las ciudades principales, buscando comportamientos que permitan entender de forma general el avance del virus por cada ciudad. Los patrones que se identifican en caunto al comportamiento de los "picos" de la pandemia son claves para delimitar los datos de prueba y entrenamiento para la construcción de un modelo que permita un pronostico confiable.
+
+### Tabla de resumen Covid para las cinco ciudades principales
+* _Con corte al 5 de septiembre del 2020_
+
+![Tabla resumen de ciudades - Covid](https://github.com/AP-2020-1S/covid-19-sandaye/blob/master/Final%20Analitica/fig/tabla_total_ciudades.png)
+
 
 #### Medellín
 
@@ -155,9 +163,6 @@ _Ver código exploratio de datos en el siguiente link:_
 ![Comportamiento SARS-COV-2](https://github.com/AP-2020-1S/covid-19-sandaye/blob/master/Final%20Analitica/fig/totales_cartagena.png)
 
 
-total infectados en tabla
-
-
 ### Muestras procesadas
 
 ![Muestras diarias procesadas](https://github.com/AP-2020-1S/covid-19-sandaye/blob/master/Final%20Analitica/fig/puebas_procesadas_diarias.png)
@@ -167,13 +172,12 @@ En los últimos 20 días, con corte al 5 de septiembre, se ha observado una dism
 Este es un dato relevante en el análsis de los resultados de los modelos de predicción de corto y mediano plazo, dado que dicha reducción también se ve reflejada en la tendencia descendente de los casos confirmados y fallecidos. Por lo que es muy problable que exista un subregistro en la base de datos y no reflejen de forma exacta la realidad de la pandemia.  
 
 
-
-
 # METODOLOGIAS PROPUESTAS
 Para  este proyecto se proponen las siguientes metodologías de pronóstico 
 
-## 1. _Modelo de pronóstico  de corto  plazo_
-## 1.1 _Modelo ARIMA_
+## _Modelo de pronóstico  de corto  plazo_
+###  _Modelo ARIMA_
+
 En 1970, Box y Jenkins desarrollaron un cuerpo metodológico destinado a identificar, estimar y diagnosticar modelos dinámicos de series temporales en los que la variable tiempo juega un papel fundamental. Una parte importante de esta metodología está pensada para liberar al investigador económetra de la tarea de especificación de los modelos dejando que los propios datos temporales de la variable a estudiar nos indiquen las características de la estructura probabilística subyacente.
 
 El inconveniente es que, al renunciar a la inclusión de un conjunto más amplio de variables explicativas, no atendemos a las relaciones que sin duda existen entre casi todas las variables económicas perdiendo capacidad de análisis al tiempo que renunciamos, implícitamente, al estudio teórico previo del fenómeno y a su indudable utilidad. Sin embargo , los modelos ARIMA son de gran utilidad en muchos campos. En este proyecto elegimos usar este modelo gracias a su gran potencial y simpleza tanto en interpretación como en aplicabilidad
@@ -218,8 +222,8 @@ Variables a predecir por el modelo ARIMA nombrado anteriormente:
 |Muertes (Diario)               |  Serie de Tiempo                |
 
 
-## _2. Modelo de pronóstico  de mediano  plazo_
-## _2.1 Modelo SIR_
+## _Modelo de pronóstico  de mediano  plazo_
+### _Modelo SIR_
 Los modelos SIR fueron desarrollados por Kermack y McKendrick en 1927 y han sido aplicados en diversos escenarios de epidemias. Estos modelos estiman el número teórico de personas susceptibles de enfermar (susceptibles), el número de enfermos (infectados) y el número de personas que ya no pueden transmitir la enfermedad (Recuperados o fallecidos), en una población a lo largo del tiempo. Los supuestos básicos de los modelos SIR son: a. La población es homogénea y de tamaño fijo; b. En un momento dado, cada individuo sólo puede pertenecer a uno de los siguientes conjuntos: infectados, susceptibles o resistentes; c. La interacción entre los individuos es aleatoria, y; d. No hay intervención externa que cambie la tasa de contacto de la población. En estos modelos se asume que la población por estado (N) es constante y que el número de individuos susceptibles S(t), infectados I(t) y fallecidos R(t) son variables dependientes del tiempo, de manera que:
 
 <img aling="center" src="fig\SIR.png"
@@ -239,10 +243,10 @@ Dado que el tamaño de la población es fijo, se puede reducir el sistema de ecu
 
 
 # DESARROLLO DE LOS MODELOS
+
 ## _Esquema de desarrollo del modelo ARIMA_
-<img aling="center" src="fig\ESQUEMAARIMA.png"
-     alt="arima"
-     style="float: left; margin-right: 1000px;" />
+
+![Esquema](https://github.com/AP-2020-1S/covid-19-sandaye/blob/master/Final%20Analitica/fig/ESQUEMAARIMA.PNG)
 
 ## _Código Python(Etapas)_
 
