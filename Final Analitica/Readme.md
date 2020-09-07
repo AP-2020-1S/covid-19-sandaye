@@ -246,254 +246,81 @@ Dado que el tamaño de la población es fijo, se puede reducir el sistema de ecu
 
 ## _Esquema de desarrollo del modelo ARIMA_
 
+Toda la rutina se ejecuta de forma automatica y en orden desde el archivo [RUN.ipynb](https://github.com/AP-2020-1S/covid-19-sandaye/blob/master/Final%20Analitica/Notebooks/RUN.ipynb "Jupyter notebook").  
+
 ![Esquema](https://github.com/AP-2020-1S/covid-19-sandaye/blob/master/Final%20Analitica/fig/ESQUEMAARIMA.PNG)
 
 ## _Código Python(Etapas)_
 
-* _Etapa 1_
+* _Etapa 1_: Actualización de las series de tiempo historicas con una única rutina
 
-```python
-import requests
-import os.path
-import os
-import pandas as pd
-import numpy as np
-import requests
-import os.path
-import os
-import datetime
-import dateutil
-import subprocess
-import sys
-import tempfile
+    * Primero se hace la descarga de datos: 
+    
+        _Ver rutina de descarga de datos en el siguiente link:_
+    
+        [Rutina_descarga_datos](https://github.com/AP-2020-1S/covid-19-sandaye/blob/master/Final%20Analitica/Notebooks/1.down_data.ipynb "Jupyter notebook")
 
-!pip install unidecode
-import unidecode
+    * Posteriormente se ejecuta la rutina de limpieza de datos:
+        _Ver rutina de limpieza de datos en el siguiente link:_
 
-# data oficial
-url_dataset = 'https://www.datos.gov.co/api/views/gt2j-8ykr/rows.csv?accessType=DOWNLOAD'
-# muestras procesadas diarias
-url_muestras_diarias = 'https://e.infogram.com/api/live/flex/638d656c-c77b-4326-97d3-e50cb410c6ab/8188140c-8352-4994-85e3-2100a4dbd9db?'
+        [Rutina_limpieza_datos](https://github.com/AP-2020-1S/covid-19-sandaye/blob/master/Final%20Analitica/Notebooks/2.Clear_data.ipynb "Jupyter notebook")
 
-# datos de entrada disponibles en el directorio "../Input/".
-'./'
-if os.path.split(os.path.abspath('.'))[-1] == 'src':
-    '../Input_data'
-# datos de salida disponibles en el directorio "../Output/".
-'./'
-if os.path.split(os.path.abspath('.'))[-1] == 'src':
-    '../Output'
+    * Por último se crean los archivos de trabajo:
+        _Ver código de creación de archivos de trabajo en el siguiente link:_
 
-    # crear archivo data_covid.csv
-with requests.get(url_dataset) as dataset_oficial:
-    with open(os.path.join('../Input_data', 'data_covid.csv'), 'wb') as dataset_file:
-        dataset_file.write(dataset_oficial.content)
+        [Crear_archivos_trabajo](https://github.com/AP-2020-1S/covid-19-sandaye/blob/master/Final%20Analitica/Notebooks/3.dataframe_ciudades.ipynb "Jupyter notebook")
 
-        # crear archivo muestras diarias procesadas
-with requests.get(url_muestras_diarias) as dataset_muestras:
-    with open(os.path.join('../Input_data', 'data_muestras_procesadas.csv'), 'wb') as dataset_file:
-        dataset_file.write(dataset_muestras.content)
+* _Etapa 2 y 3_: Auto-ajuste del modelo ARIMA a la serie de tiempo
 
-# Lee el archivo descargado
-dfcovid = pd.read_csv(os.path.join('../Input_data', 'data_covid.csv'))
+    * A continuación se presentan las rutinas de auto-ajuste de los modelos tipo ARIMA para los datos historicos del SARS-COV-2 de las cinco principales ciudades:
+    * Auto-ajuste modelo ARIMA para Medellín
 
-# nombre de atributo en mayuscula y sin acento
-dfcovid.columns = [unidecode.unidecode(value).upper() for value in dfcovid.columns]
+        [Modelo Medellín corto plazo](https://github.com/AP-2020-1S/covid-19-sandaye/blob/master/Final%20Analitica/Notebooks/5.medellin_corto.ipynb "Jupyter notebook")
 
-# Eliminar ciudades diferentes a las 5 seleccionadas:
-dfcovid=dfcovid.drop(dfcovid[(dfcovid['CODIGO DIVIPOLA'] != 5001)&(dfcovid['CODIGO DIVIPOLA'] != 11001)&(dfcovid['CODIGO DIVIPOLA'] != 8001)&(dfcovid['CODIGO DIVIPOLA'] != 76001)&(dfcovid['CODIGO DIVIPOLA'] != 13001)].index)
+    * Auto-ajuste modelo ARIMA para Bogotá
+        
+        [Modelo Bogotá corto plazo](https://github.com/AP-2020-1S/covid-19-sandaye/blob/master/Final%20Analitica/Notebooks/6.bogota_corto.ipynb "Jupyter notebook")
 
-#Eliminar columnas basura
-dfcovid = dfcovid.drop(['NOMBRE GRUPO ETNICO','PERTENENCIA ETNICA'], axis=1)
+    * Auto-ajuste modelo ARIMA para Cali
+        
+        [Modelo Cali corto plazo](https://github.com/AP-2020-1S/covid-19-sandaye/blob/master/Final%20Analitica/Notebooks/7.cali_corto.ipynb "Jupyter notebook")
 
-#Convertir las columnas a tipo string para un facil manejo
-dfcovid = dfcovid.astype({"DEPARTAMENTO O DISTRITO ": str, "TIPO RECUPERACION": str,"PAIS DE PROCEDENCIA": str,"ESTADO": str, "ATENCION": str})
+    * Auto-ajuste modelo ARIMA para Barranquilla
+        
+        [Modelo Barranquilla corto plazo](https://github.com/AP-2020-1S/covid-19-sandaye/blob/master/Final%20Analitica/Notebooks/8.barranquilla_corto.ipynb "Jupyter notebook")
 
-#Transformar los datos de texto en mayusculas (PENDIENTE)
-dfcovid['CIUDAD DE UBICACION'] = [unidecode.unidecode(value).upper() for value in dfcovid['CIUDAD DE UBICACION']]
-dfcovid['DEPARTAMENTO O DISTRITO '] = [unidecode.unidecode(value).upper() for value in dfcovid['DEPARTAMENTO O DISTRITO ']]
-dfcovid['ATENCION'] = [unidecode.unidecode(value).upper() for value in dfcovid['ATENCION']]
-dfcovid['SEXO'] = [unidecode.unidecode(value).upper() for value in dfcovid['SEXO']]
-dfcovid['TIPO'] = [unidecode.unidecode(value).upper() for value in dfcovid['TIPO']]
-dfcovid['ESTADO'] = [unidecode.unidecode(value).upper() for value in dfcovid['ESTADO']]
-dfcovid['PAIS DE PROCEDENCIA'] = [unidecode.unidecode(value).upper() for value in dfcovid['PAIS DE PROCEDENCIA']]
-dfcovid['TIPO RECUPERACION'] = [unidecode.unidecode(value).upper() for value in dfcovid['TIPO RECUPERACION']]
-
-#Convertir columnas a tipo DATETIME
-dfcovid['FECHA DE NOTIFICACION'] = pd.to_datetime(dfcovid['FECHA DE NOTIFICACION'])
-dfcovid['FECHA DE MUERTE'] = pd.to_datetime(dfcovid['FECHA DE MUERTE'])
-dfcovid['FECHA DIAGNOSTICO'] = pd.to_datetime(dfcovid['FECHA DIAGNOSTICO'])
-dfcovid['FECHA RECUPERADO'] = pd.to_datetime(dfcovid['FECHA RECUPERADO'])
-dfcovid['FECHA REPORTE WEB'] = pd.to_datetime(dfcovid['FECHA REPORTE WEB'])
-
-#Crea la base final de trabajo
-dfcovid.to_csv(os.path.join('../Output', 'data_final.csv'), index=False)
-
-#llama la base final de trabajo 
-dfcovid_ciudades = pd.read_csv(os.path.join('../Output', 'data_final.csv'))
-
-# Creación de base de trabajo por ciudad (ejemplo Medellín)
-
-dfmedellin=dfcovid_ciudades[dfcovid_ciudades['CODIGO DIVIPOLA']==5001]
-
-#DATOS DIARIOS
-dfmedellin_nuevoscasos = pd.to_datetime(dfmedellin['FECHA REPORTE WEB'])
-dfmedellin_nuevoscasos_daily = dfmedellin_nuevoscasos.groupby(dfmedellin_nuevoscasos.dt.floor('d')).size().reset_index(name='CASOS')
-dfmedellin_nuevoscasos_daily.columns = ['FECHA', 'CASOS']
-
-dfmedellin_muertes= pd.to_datetime(dfmedellin['FECHA DE MUERTE'])
-dfmedellin_muertes_daily=dfmedellin_muertes.groupby(dfmedellin_muertes.dt.floor('d')).size().reset_index(name='FALLECIDOS')
-dfmedellin_muertes_daily.columns = ['FECHA', 'FALLECIDOS']
-
-dfmedellin_recu = dfmedellin[dfmedellin['FECHA DE MUERTE'].isna()] 
-#se extrae las fechas de muertes que tambien estan en recuperados
-dfmedellin_recu = pd.to_datetime(dfmedellin_recu['FECHA RECUPERADO'])
-dfmedellin_recu_daily=dfmedellin_recu.groupby(dfmedellin_recu.dt.floor('d')).size().reset_index(name='RECUPERADOS')
-dfmedellin_recu_daily.columns = ['FECHA', 'RECUPERADOS']
-
-#BASE DE TRABAJO
-db_medellin = pd.merge(dfmedellin_nuevoscasos_daily[['FECHA','CASOS']],dfmedellin_recu_daily[['FECHA','RECUPERADOS']],on='FECHA',how='left')
-db_medellin = pd.merge(db_medellin[['FECHA','CASOS','RECUPERADOS']],dfmedellin_muertes_daily[['FECHA','FALLECIDOS']],on='FECHA',how='left')
-db_medellin = db_medellin.fillna(0)
-db_medellin['CASOS_ACUMM'] = db_medellin['CASOS'].cumsum()
-db_medellin['RECUPERADOS_ACUMM'] = db_medellin['RECUPERADOS'].cumsum()
-db_medellin['FALLECIDOS_ACUMM'] = db_medellin['FALLECIDOS'].cumsum()
-db_medellin['ACTIVOS'] =db_medellin['CASOS_ACUMM']-db_medellin['RECUPERADOS_ACUMM']-db_medellin['FALLECIDOS_ACUMM']
-db_medellin['ACTIVOS_T1']=db_medellin['ACTIVOS'].shift(1)
-#db_medellin
-db_medellin.to_csv(os.path.join('../Output', 'data_medellin.csv'), index=False)
-```
-* _Etapa 2 y 3_
-```python
-import pandas as pd
-import numpy as np
-import datetime
-import os
-import os.path
-import sklearn
-! pip install pmdarima
-from pmdarima.arima import auto_arima
-from pmdarima.arima import ADFTest
-import matplotlib.pylab as plt
-import matplotlib.pyplot as plt
-!pip install plotly==4.9.0
-import plotly.graph_objects as go
-from plotly.offline import plot
-
-# Datos Nuevos casos Medellín
-df = pd.read_csv(os.path.join('../Output', 'data_medellin.csv'))
-df = df[['FECHA','CASOS']]
-df2 = pd.to_datetime(df['FECHA'])
-df.index = df2
-data_nuevoscasos = df.drop(['FECHA'], axis=1)
-
-# Datos Recuperados Acumulados Medellín
-df1 = pd.read_csv(os.path.join('../Output', 'data_medellin.csv'))
-df1 = df1[['FECHA','RECUPERADOS_ACUMM']]
-df3 = pd.to_datetime(df1['FECHA'])
-df1.index = df3
-data_recuperados = df1.drop(['FECHA'], axis=1)
-
-# Datos Muertes diarias Medellín
-df4 = pd.read_csv(os.path.join('../Output', 'data_medellin.csv'))
-df4 = df4[['FECHA','FALLECIDOS']]
-df5 = pd.to_datetime(df4['FECHA'])
-df4.index = df5
-data_fallecidos_diarios = df4.drop(['FECHA'], axis=1)
-
-# Datos Muertes Acumuladas Medellín
-df4 = pd.read_csv(os.path.join('../Output', 'data_medellin.csv'))
-df4 = df4[['FECHA','FALLECIDOS_ACUMM']]
-df5 = pd.to_datetime(df4['FECHA'])
-df4.index = df5
-data_fallecidos = df4.drop(['FECHA'], axis=1)
-
-# Datos Activos Medellín
-df5 = pd.read_csv(os.path.join('../Output', 'data_medellin.csv'))
-df5 = df5[['FECHA','ACTIVOS']]
-df6 = pd.to_datetime(df5['FECHA'])
-df5.index = df6
-data_activos = df5.drop(['FECHA'], axis=1)
-
-# Datos Confirmados Medellín
-df7 = pd.read_csv(os.path.join('../Output', 'data_medellin.csv'))
-df7 = df7[['FECHA','CASOS_ACUMM']]
-df8 = pd.to_datetime(df7['FECHA'])
-df7.index = df8
-data_confirmados = df7.drop(['FECHA'], axis=1)
-
-# Construcción modelo AUTO-ARIMA para Nuevos Casos Diarios
-
-# Data, data_train y data_test
-real = data_nuevoscasos
-train = data_nuevoscasos[:int(len(data_nuevoscasos)*(1-7/len(data_nuevoscasos)))]
-test = data_nuevoscasos[-7:]
-
-# definición del medelo -proceso de ciclo de simulación
-modelo_arima = auto_arima(train, start_p=1, d=None, start_q=1, 
-                          max_p=12, max_d=8, max_q=12,
-                          start_P=1, D=None, start_Q=1, 
-                          max_P=12, max_D=8, max_Q=12, max_order=None, m=7, seasonal=True,
-                          trace=True, supress_warnings=True, stepwise=True, random_state=20, n_fits=50)
+    * Auto-ajuste modelo ARIMA para Cartagena
+        
+        [Modelo Cartagena corto plazo](https://github.com/AP-2020-1S/covid-19-sandaye/blob/master/Final%20Analitica/Notebooks/9.cartagena_corto.ipynb "Jupyter notebook")
 
 
-# Resultados del mejor modelo
-modelo_arima.summary()
+
+* _Etapa 4_: Pronóstico 
+
+    * A continuación se presentan las rutinas de pronóstico del modelo ARIMA para los casos nuevos, confirmados, recuperados, fallecidos y activos de SARS-COV-2 para las cinco principales ciudades, usando el mejor modelo encontrado en la etapa anterior.
+    
+    * Pronóstico modelo ARIMA para Medellín
+
+        [Modelo Medellín corto plazo](https://github.com/AP-2020-1S/covid-19-sandaye/blob/master/Final%20Analitica/Notebooks/5.medellin_corto.ipynb "Jupyter notebook")
+
+    * Pronóstico modelo ARIMA para Bogotá
+        
+        [Modelo Bogotá corto plazo](https://github.com/AP-2020-1S/covid-19-sandaye/blob/master/Final%20Analitica/Notebooks/6.bogota_corto.ipynb "Jupyter notebook")
+
+    * Pronóstico modelo ARIMA para Cali
+        
+        [Modelo Cali corto plazo](https://github.com/AP-2020-1S/covid-19-sandaye/blob/master/Final%20Analitica/Notebooks/7.cali_corto.ipynb "Jupyter notebook")
+
+    * Pronóstico modelo ARIMA para Barranquilla
+        
+        [Modelo Barranquilla corto plazo](https://github.com/AP-2020-1S/covid-19-sandaye/blob/master/Final%20Analitica/Notebooks/8.barranquilla_corto.ipynb "Jupyter notebook")
+
+    * Pronóstico modelo ARIMA para Cartagena
+        
+        [Modelo Cartagena corto plazo](https://github.com/AP-2020-1S/covid-19-sandaye/blob/master/Final%20Analitica/Notebooks/9.cartagena_corto.ipynb "Jupyter notebook")
 
 
-#Diagnostico Modelo
-modelo_arima.plot_diagnostics(figsize=(14, 8))
-plt.show()
-```
-* _Etapa 4_
-```python
-#test predicción con Auto Arima
-test_prediccion_nuevoscasos = pd.DataFrame(modelo_arima.predict(n_periods = len(test)), index = test.index)
-test_prediccion_nuevoscasos.columns = ['Test predicción nuevos casos']
-#test_prediccion_nuevoscasos
 
-# Grafica de predicción
-fig = go.Figure()
-fig.add_trace(go.Scatter(x=train.index, y=train['CASOS'],mode='lines',name='Train_Casos_Diarios'))
-fig.add_trace(go.Scatter(x=test.index, y=test['CASOS'], mode='lines',name='Test_Casos_Diarios'))
-fig.add_trace(go.Scatter(x=test_prediccion_nuevoscasos.index, y=test_prediccion_nuevoscasos['Test predicción nuevos casos'], mode='lines',name='Prediccion_Casos_Diarios'))
-fig.update_layout(
-        hovermode='x',
-        font=dict(
-            family="Courier New, monospace",
-            size=14,
-            color='#3F3F3F',
-        ),
-        legend=dict(
-            x=0.02,
-            y=1,
-            traceorder="normal",
-            font=dict(
-                family="sans-serif",
-                size=12,
-                color= '#474747',
-            ),
-            bgcolor='#FFFFFF',
-            borderwidth=3
-        ),
-        paper_bgcolor='#FFFFFF',
-        plot_bgcolor='#F4EEEF',
-        margin=dict(l=0, 
-                    r=0, 
-                    t=0, 
-                    b=0
-                    ),
-      
-
-    )
-fig.update_xaxes(showgrid=True, gridwidth=1, gridcolor='#D9D8D8')
-fig.update_yaxes(showgrid=True, gridwidth=1, gridcolor='#D9D8D8')
-
-fig.update_yaxes(zeroline=True, zerolinewidth=2, zerolinecolor='#474747')
-fig.show()
-
-fig.write_html('../Output/med_test_corto_nuev_casos.html')
-```
 ## _Esquema de desarrollo del modelo SIR_
 <img aling="center" src="fig\ESQUEMASIR.png"
      alt="arima"
