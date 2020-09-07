@@ -1,8 +1,7 @@
-## URL Dashboard ##
-## https://sangonzalez.github.io/
 
+# PRONÓSTICO DE LA EVOLUCIÓN DE CASOS CONFIRMADOS, RECUPERADOS Y MUERTES POR SARS-COV-2 PARA LAS 5 PRINCIPALES CIUDADES DE COLOMBIA
 
-# Pronóstico de la evolución de casos confirmados,recuperados y muertes de SARS-CoV-2 para las 5 principales ciudades de Colombia
+##### [Dashboard](https://meet.google.com/linkredirect?authuser=0&dest=https%3A%2F%2Fsangonzalez.github.io%2F "Abrir Dashboard")
 
 ### Equipo de trabajo:
 
