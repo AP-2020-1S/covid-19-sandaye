@@ -446,7 +446,11 @@ la vida útil de los modelos de predicción estan determinados por factores exog
 * Por politicas de país que ya no permitan la actualización de los datos.
 
 
-## Referencias
+# Referencias
+
+Instituto Nacional de Salud.(2020). Modelo de Transmisión de Coronavirus COVID-19, Escenarios para Colombia. Tomado de : https://www.ins.gov.co/Direcciones/ONS/SiteAssets/Modelo%20COVID-19%20Colombia%20INS_v5.pdf
+
+Gobierno Nacional de Colombia.Datos abiertos: https://www.datos.gov.co/Salud-y-Protecci-n-Social/Casos-positivos-de-COVID-19-en-Colombia/gt2j-8ykr/data
 
 Manrique, F., et al.(2020). Modelo SIR de la pandemia de Covid-19 en Colombia. Revista de Salud Pública, 2020, vol. 22, p. 1-9. http://dx.doi.org/10.15446/rsap.v22.85977
 
