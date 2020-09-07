@@ -319,8 +319,6 @@ Toda la rutina se ejecuta de forma automatica y en orden desde el archivo [RUN.i
         
         [Modelo Cartagena corto plazo](https://github.com/AP-2020-1S/covid-19-sandaye/blob/master/Final%20Analitica/Notebooks/9.cartagena_corto.ipynb "Jupyter notebook")
 
-
-
 ## _Esquema de desarrollo del modelo SIR_
 <img aling="center" src="fig\ESQUEMASIR.png"
      alt="arima"
